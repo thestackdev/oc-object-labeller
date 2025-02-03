@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        #imageContainer {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .bbox {
+            position: absolute;
+            border: 2px solid #00ff00;
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+        .label {
+            position: absolute;
+            background-color: #00ff00;
+            color: white;
+            padding: 2px 6px;
+            font-size: 12px;
+            top: -20px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Object Detection</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="imageContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Display the image
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                imageContainer.appendChild(img);
+                detectObjects(file, img);
+            };
+        });
+
+        async function detectObjects(file, img) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('http://localhost:8000/detect', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                // Draw bounding boxes
+                data.detections.forEach(detection => {
+                    const [x1, y1, x2, y2] = detection.bbox;
+                    const confidence = Math.round(detection.confidence * 100);
+                    
+                    const box = document.createElement('div');
+                    box.className = 'bbox';
+                    box.style.left = `${x1}px`;
+                    box.style.top = `${y1}px`;
+                    box.style.width = `${x2 - x1}px`;
+                    box.style.height = `${y2 - y1}px`;
+
+                    const label = document.createElement('div');
+                    label.className = 'label';
+                    label.textContent = `${detection.class} ${confidence}%`;
+                    box.appendChild(label);
+
+                    document.getElementById('imageContainer').appendChild(box);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error detecting objects');
+            }
+        }
+    </script>
+</body>
+</html>

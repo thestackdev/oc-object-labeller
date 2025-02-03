@@ -1,0 +1,78 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+.Python
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Python-specific files
+*.pyo
+*.pyd
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Dataset files
+datasets/ncert/train/
+datasets/ncert/test/
+datasets/ncert/valid/
+
+# Ignore YAML files with sensitive paths (optional)
+datasets/ncert/data.yaml
+
+# Model files (optional, keep if not required in the repo)
+models/*.pt
+
+# Environment files
+.env
+*.env
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+docker-compose*.yml
+
+# Logs
+*.log
+logs/
+
+# Dependency files (if auto-generated)
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PyInstaller
+*.spec
+
+# Node-related files (if any web assets exist)
+node_modules/
+npm-debug.log
+
+# Lock files (optional)
+Pipfile.lock
+poetry.lock
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~
