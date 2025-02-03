@@ -1,0 +1,14 @@
+train: /Users/shanmukeshwar/Desktop/vision-ai/datasets/ncert/train/images
+val: /Users/shanmukeshwar/Desktop/vision-ai/datasets/ncert/valid/images
+test: /Users/shanmukeshwar/Desktop/vision-ai/datasets/ncert/test/images
+
+nc: 7
+names:
+  ["Chart", "Circuit Diagram", "Equation", "Figure", "Image", "Logo", "Table"]
+
+roboflow:
+  workspace: dod
+  project: ncert-o7m3m
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/dod/ncert-o7m3m/dataset/1

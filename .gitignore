@@ -21,17 +21,6 @@ ENV/
 # VS Code settings
 .vscode/
 
-# Dataset files
-datasets/ncert/train/
-datasets/ncert/test/
-datasets/ncert/valid/
-
-# Ignore YAML files with sensitive paths (optional)
-datasets/ncert/data.yaml
-
-# Model files (optional, keep if not required in the repo)
-models/*.pt
-
 # Environment files
 .env
 *.env
